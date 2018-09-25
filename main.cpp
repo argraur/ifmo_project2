@@ -1,7 +1,18 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+
+#ifdef _WIN32
+
+#include <windows.h>
+
+#endif
+
+#ifdef linux
+
 #include <unistd.h>
+
+#endif
 
 struct Dot {
 	int x, y;
@@ -13,7 +24,11 @@ struct Polygon {
 };
 
 int PolygonRun() {
-	system("/bin/bash -c clear");
+	#ifdef linux
+		system("/bin/bash -c clear");
+	#else
+		system("CLS");
+	#endif
         // Polygon
         Polygon polygon;
         int angles;
@@ -44,7 +59,11 @@ int PolygonRun() {
 }
 
 int DotRun() {
-	system("/bin/bash -c clear");
+        #ifdef linux
+                system("/bin/bash -c clear");
+        #else
+                system("CLS");
+        #endif
         // Dot
         Dot dot;
         std::cout << "Dot X: "; std::cin >> dot.x;
@@ -56,7 +75,11 @@ int DotRun() {
 int main() {
 	// Menu
 	for (;;) {
-		system("/bin/bash -c clear");
+	        #ifdef linux
+                	system("/bin/bash -c clear");
+        	#else
+                	system("CLS");
+        	#endif
 		std::cout << "1. Dot" << std::endl;
 		std::cout << "2. Polygon" << std::endl;
 		std::cout << "0. Exit" << std::endl;
@@ -64,16 +87,28 @@ int main() {
 		std::cout << "Make a choice (0-2): " << std::endl; std::cin >> choice;
 		switch (choice) {
 			case 0:
-				system("/bin/bash -c clear");
+				#ifdef linux
+                			system("/bin/bash -c clear");
+        			#else
+                			system("CLS");
+        			#endif
 				return 0;
 				break;
 			case 1:
 				DotRun();
-				system("/bin/bash -c read");
+                                #ifdef linux
+                                        system("/bin/bash -c read");
+                                #else
+                                        system("pause");
+                                #endif
 				break;
 			case 2:
 				PolygonRun();
-				system("/bin/bash -c read");
+                                #ifdef linux
+                                        system("/bin/bash -c read");
+                                #else
+                                        system("pause");
+                                #endif
 				break;
 			default:
 				break;
